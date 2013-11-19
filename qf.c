@@ -66,8 +66,9 @@ int main(int argc, char *argv[])
 {
     matchdata md;
     int flags = 0, opt;
+    int depth = -1;
 
-    while ((opt = getopt(argc, argv, "adfh")) != -1) {
+    while ((opt = getopt(argc, argv, "adfh123456789")) != -1) {
         switch (opt) {
         case 'a':
             flags |= DW_HIDDEN;
@@ -77,6 +78,17 @@ int main(int argc, char *argv[])
             break;
         case 'f':
             flags |= DW_FILES;
+            break;
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            depth = opt - '0';
             break;
         case 'h':
         case '?':
@@ -99,7 +111,7 @@ int main(int argc, char *argv[])
     else
         usage();
 
-    dirwalk(".", flags, matchdir, &md);
+    dirwalk(".", flags, matchdir, &md, depth);
 
     array_sort(md.dirs, namecmp);
     array_foreach(md.dirs, printname);

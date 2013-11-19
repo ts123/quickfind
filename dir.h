@@ -5,6 +5,6 @@
 #define DW_DIRECTORIES  2   /* Process directories */
 #define DW_FILES        4   /* Process files */
 
-void dirwalk(char *name, int opts, void (*func)(char *, void *), void *ctx);
+void dirwalk(char *name, int opts, void (*func)(char *, void *), void *ctx, int depth);
 
 #endif /* end of include guard: DIR_H */
